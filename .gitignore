@@ -1,3 +1,4 @@
 data/output/*
 data/processed/*
 data/raw/*
+notebooks/columns.txt
