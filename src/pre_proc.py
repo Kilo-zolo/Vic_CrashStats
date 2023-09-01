@@ -1,27 +1,12 @@
 import sys
 sys.path.append('/path/to/directory/containing/data_prep')
 from data_prep import load_and_prep_data
-import os
-import glob
-import re
-from joblib import dump, load
-
-import numpy as np
 import pandas as pd
-import scipy.stats as st
-from statsmodels.miscmodels.ordinal_model import OrderedModel
-
-from sklearn.preprocessing import OneHotEncoder, OrdinalEncoder, MultiLabelBinarizer, StandardScaler
+from sklearn.preprocessing import OneHotEncoder, StandardScaler
 from sklearn.decomposition import PCA
-from sklearn.linear_model import LogisticRegression
-from sklearn.model_selection import train_test_split, GridSearchCV, RandomizedSearchCV
-from sklearn.metrics import accuracy_score, f1_score, roc_curve, roc_auc_score, auc, \
-classification_report, confusion_matrix, average_precision_score, precision_recall_curve
+from sklearn.model_selection import train_test_split
 
-import matplotlib as mpl
-import matplotlib.pyplot as plt
-import seaborn as sns
-import ipywidgets
+
 
 dframes = {"person_df" : "/home/ebi/Blunomy_cs/data/raw/PERSON.csv",
            "accident_df": "/home/ebi/Blunomy_cs/data/raw/ACCIDENT.csv",
