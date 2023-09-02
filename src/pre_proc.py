@@ -1,10 +1,8 @@
-import sys
-sys.path.append('/path/to/directory/containing/data_prep')
-from data_prep import load_and_prep_data
 import pandas as pd
 from sklearn.preprocessing import OneHotEncoder, StandardScaler
 from sklearn.decomposition import PCA
 from sklearn.model_selection import train_test_split
+from sklearn.impute import SimpleImputer
 
 def feature_eng(loaded_data):
     print("Passing data...")
@@ -34,7 +32,13 @@ def feature_eng(loaded_data):
 
     ## how many drivers of each sex
     print("Creating FEMALE_DRIVERS & MALE_DRIVERS columns...")
-    df[['FEMALE_DRIVERS', 'MALE_DRIVERS']] = person_data[person_data['Road User Type Desc']=='Drivers'].groupby('ACCIDENT_NO')['SEX'].value_counts().unstack().fillna(0).drop(['U', ' '], axis=1)
+    temp_df = person_data[person_data['Road User Type Desc']=='Drivers'].groupby('ACCIDENT_NO')['SEX'].value_counts().unstack().fillna(0)
+    
+    cols_to_drop = ['U', ' ']
+    temp_df.drop([col for col in cols_to_drop if col in temp_df.columns], axis=1, inplace=True)
+
+    df[['FEMALE_DRIVERS', 'MALE_DRIVERS']] = temp_df                                                                                                                                                                         
+
 
     ## if our newly newly created numeric columns have nulls i.e no drivers in the accident
     ## fill numeric nulls with -1
@@ -146,9 +150,12 @@ def pre_process(main_df):
     ## dimension reduction
     print("Reducing dimensions for x_train & x_test...")
     pca = PCA(0.95)
-    pca.fit(x_train)
-    x_train = pca.transform(x_train)
-    x_test = pca.transform(x_test)
+    imputer = SimpleImputer(strategy='most_frequent')
+    x_train_imputed = imputer.fit_transform(x_train)
+    x_test_imputed = imputer.fit_transform(x_test)
+    pca.fit(x_train_imputed)
+    x_train = pca.transform(x_train_imputed)
+    x_test = pca.transform(x_test_imputed)
     print("Successfully completed all pre-processing required...")
 
     return{

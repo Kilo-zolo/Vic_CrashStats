@@ -1,3 +1,5 @@
+import sys
+sys.path.append('/home/ebi/Blunomy_cs/src/data_prep.py')
 from data_prep import load_and_prep_data
 from pre_proc import feature_eng, pre_process
 from plots import plt_conf_matrix

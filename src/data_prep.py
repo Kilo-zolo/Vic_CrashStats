@@ -15,8 +15,8 @@ def load_and_prep_data(dframes):
 
     ## convert datetime col to datetime format
     print("Converting accidentdate and accidenttime to relevant datetimeformat...")
-    accident_df['ACCIDENTDATE'] = pd.to_datetime(accident_df['ACCIDENTDATE'], format= 'mixed', dayfirst=True)
-    accident_df['ACCIDENTTIME'] = pd.to_datetime(accident_df['ACCIDENTTIME'], format= 'mixed')
+    accident_df['ACCIDENTDATE'] = pd.to_datetime(accident_df['ACCIDENTDATE'], dayfirst=True)
+    accident_df['ACCIDENTTIME'] = pd.to_datetime(accident_df['ACCIDENTTIME'], errors='coerce')
 
     ## the columns we are choosing to include in our modeling
     print("Choosing columns...")
