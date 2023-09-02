@@ -6,20 +6,6 @@ from sklearn.preprocessing import OneHotEncoder, StandardScaler
 from sklearn.decomposition import PCA
 from sklearn.model_selection import train_test_split
 
-
-
-dframes = {"person_df" : "/home/ebi/Blunomy_cs/data/raw/PERSON.csv",
-           "accident_df": "/home/ebi/Blunomy_cs/data/raw/ACCIDENT.csv",
-           "vehicle_df": "/home/ebi/Blunomy_cs/data/raw/VEHICLE.csv",
-           "accident_event_df": "/home/ebi/Blunomy_cs/data/raw/ACCIDENT_EVENT.csv",
-           "accident_location_df": "/home/ebi/Blunomy_cs/data/raw/ACCIDENT_LOCATION.csv",
-           "atmospheric_cond_df": "/home/ebi/Blunomy_cs/data/raw/ATMOSPHERIC_COND.csv",
-           "node_df": "/home/ebi/Blunomy_cs/data/raw/NODE.csv",
-           "node_id_complex_int_id_df": "/home/ebi/Blunomy_cs/data/raw/NODE_ID_COMPLEX_INT_ID.csv",
-           "road_surface_cond_df": "/home/ebi/Blunomy_cs/data/raw/ROAD_SURFACE_COND.csv"}
-
-loaded_data = load_and_prep_data(dframes)
-
 def feature_eng(loaded_data):
     print("Passing data...")
     accident_data = loaded_data['accident_data']
@@ -95,8 +81,6 @@ def feature_eng(loaded_data):
     df = df[df['SEVERITY']!=4]
     print("Successfully created usable dataframe...")
     return df
-
-main_df = feature_eng(loaded_data)
 
 def pre_process(main_df):
     ## numeric fields
@@ -174,7 +158,6 @@ def pre_process(main_df):
         "y_test_binary": y_test_binary
     }
 
-pre_process(main_df)
 
 
 

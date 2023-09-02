@@ -2,3 +2,4 @@ data/output/*
 data/processed/*
 data/raw/*
 notebooks/outputs
+models/*
