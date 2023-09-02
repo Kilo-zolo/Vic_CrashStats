@@ -1,5 +1,3 @@
-import sys
-sys.path.append('/path/to/directory/containing/data_prep')
 from data_prep import load_and_prep_data
 from pre_proc import feature_eng, pre_process
 from plots import plt_roc, plt_conf_matrix, plt_prec_recall
