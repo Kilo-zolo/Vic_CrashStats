@@ -4,22 +4,21 @@ from joblib import load
 from src.data_prep import load_and_prep_data
 from src.pre_proc import feature_eng, pre_process
 from src.plots import plt_conf_matrix
-from sklearn.linear_model import LogisticRegressionCV
 from sklearn.metrics import classification_report, confusion_matrix
 import os
 from datetime import datetime
 
 
 ## Access data and store in dictionary for ease of use
-dframes = {"person_df" : "/home/ebi/Blunomy_cs/data/raw/PERSON.csv",
-           "accident_df": "/home/ebi/Blunomy_cs/data/raw/ACCIDENT.csv",
-           "vehicle_df": "/home/ebi/Blunomy_cs/data/raw/VEHICLE.csv",
-           "accident_event_df": "/home/ebi/Blunomy_cs/data/raw/ACCIDENT_EVENT.csv",
-           "accident_location_df": "/home/ebi/Blunomy_cs/data/raw/ACCIDENT_LOCATION.csv",
-           "atmospheric_cond_df": "/home/ebi/Blunomy_cs/data/raw/ATMOSPHERIC_COND.csv",
-           "node_df": "/home/ebi/Blunomy_cs/data/raw/NODE.csv",
-           "node_id_complex_int_id_df": "/home/ebi/Blunomy_cs/data/raw/NODE_ID_COMPLEX_INT_ID.csv",
-           "road_surface_cond_df": "/home/ebi/Blunomy_cs/data/raw/ROAD_SURFACE_COND.csv"}
+dframes = {"person_df" : "/home/ebi/Blunomy_cs/data/custom/PERSON.csv",
+           "accident_df": "/home/ebi/Blunomy_cs/data/custom/ACCIDENT.csv",
+           "vehicle_df": "/home/ebi/Blunomy_cs/data/custom/VEHICLE.csv",
+           "accident_event_df": "/home/ebi/Blunomy_cs/data/custom/ACCIDENT_EVENT.csv",
+           "accident_location_df": "/home/ebi/Blunomy_cs/data/custom/ACCIDENT_LOCATION.csv",
+           "atmospheric_cond_df": "/home/ebi/Blunomy_cs/data/custom/ATMOSPHERIC_COND.csv",
+           "node_df": "/home/ebi/Blunomy_cs/data/custom/NODE.csv",
+           "node_id_complex_int_id_df": "/home/ebi/Blunomy_cs/data/custom/NODE_ID_COMPLEX_INT_ID.csv",
+           "road_surface_cond_df": "/home/ebi/Blunomy_cs/data/custom/ROAD_SURFACE_COND.csv"}
 
 ## Load & Prep data
 loaded_data = load_and_prep_data(dframes)
