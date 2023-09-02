@@ -155,7 +155,9 @@ def pre_process(main_df):
         "x_train": x_train,
         "x_test": x_test,
         "y_train_binary": y_train_binary,
-        "y_test_binary": y_test_binary
+        "y_test_binary": y_test_binary,
+        "y_train": y_train,
+        "y_test": y_test
     }
 
 

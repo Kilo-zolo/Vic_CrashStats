@@ -66,6 +66,14 @@ print("Creating a classification report...")
 class_rep = classification_report(y_test_binary, binary_lr_pred)
 print(class_rep)
 
+## Saving classification report 
+report_dir = '/home/ebi/Blunomy_cs/models/binary_lr_clf/reports/'
+if not os.path.exists(report_dir):
+    os.makedirs(report_dir)
+
+with open(report_dir + 'classification_report.txt', 'w') as f:
+    f.write(class_rep)
+
 ## Create a confusion matrix using the y_test and predicted test data
 print("Creating plots and saving to binary_lf_clf/plts folder...")
 

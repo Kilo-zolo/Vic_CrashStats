@@ -1,6 +1,6 @@
 from data_prep import load_and_prep_data
 from pre_proc import feature_eng, pre_process
-from plots import plt_roc, plt_conf_matrix, plt_prec_recall
+from plots import plt_conf_matrix
 from mord import LogisticIT
 import os
 from joblib import dump
@@ -33,6 +33,7 @@ train_test = pre_process(main_df)
 print("Loading data needed to fit and train model...")
 x_train = train_test['x_train']
 y_train_binary = train_test['y_train_binary']
+y_train = train_test["y_train"]
 
 ## Define Ordinal Regression model
 print("Defining Ordinal Regression model...")
@@ -41,56 +42,76 @@ olr_model = LogisticIT(max_iter=1000, verbose=3)
 # Define the params
 # Hyperparams tuned: alpha (regularization parameter)
 print("Defining parameters...")
-olr_params = {'alpha': [0, 0.5, 1, 2, 5] }
+olr_params = {'alpha': [0, 0.5, 1, 2, 5]}
 grid_search = {k: v for (k, v) in olr_params.items()}
 olr_clf = GridSearchCV(olr_model, olr_params, verbose=2)
 
 # Trainign the model
 print("Training Ordinal Regression Classifier model...")
-olr_clf.fit(x_train, y_train_binary)
+olr_clf.fit(x_train, y_train)
 
 ## Save the model to models file
 print("Saving model to models file...")
 
-model_dir = '/home/ebi/Blunomy_cs/models/binary_olr_clf/'
+model_dir = '/home/ebi/Blunomy_cs/models/olr_clf/'
 if not os.path.exists(model_dir):
     os.makedirs(model_dir)
 
-dump(olr_clf, model_dir + 'binary_olr_clf.joblib')
+dump(olr_clf, model_dir + 'olr_clf.joblib')
 
-## Load x_test, y_test_binary into a usable var
+## Load x_test, y_test into a usable var
 print("Loading data required to test and evaluate model")
 x_test = train_test['x_test']
-y_test_binary = train_test['y_test_binary']
+y_test = train_test['y_test']
 
 
 ## Predicting results for test data
-print("Testing Binary Random Forest Classifier model...")
-binary_olr_pred = olr_clf.predict(x_test)
+print("Testing Ordinal Linear Regression model...")
+olr_pred = olr_clf.predict(x_test)
 
 ## Predicting results for train data
-binary_olr_train_pred = olr_clf.predict(x_train)
+olr_train_pred = olr_clf.predict(x_train)
 
 ## Create a classification report for details on precision recall and f1-score
-print("Creating a classification report...")
-class_rep = classification_report(y_test_binary, binary_olr_pred)
-print(class_rep)
+print("Creating a classification report for test data...")
+test_class_rep = classification_report(y_test, olr_pred)
+print(test_class_rep)
+
+## Saving test classification report 
+report_dir = '/home/ebi/Blunomy_cs/models/olr_clf/reports/'
+if not os.path.exists(report_dir):
+    os.makedirs(report_dir)
+
+with open(report_dir + 'test_classification_report.txt', 'w') as f:
+    f.write(test_class_rep)
 
 ## Create a confusion matrix using the y_test and predicted test data
-print("Creating plots and saving to binary_olr_clf/plts folder...")
+print("Creating test data plots and saving to olr_clf/plts folder...")
 
-plts_dir = '/home/ebi/Blunomy_cs/models/binary_olr_clf/plts/'
+plts_dir = '/home/ebi/Blunomy_cs/models/olr_clf/plts/'
 if not os.path.exists(plts_dir):
     os.makedirs(plts_dir)
 
-cm = confusion_matrix(y_test_binary, binary_olr_pred)
+test_cm = confusion_matrix(y_test, olr_pred)
+
+print("Creating a classification report for training data...")
+train_class_rep = classification_report(y_train, olr_train_pred)
+print(train_class_rep)
+
+## Saving train classification report 
+report_dir = '/home/ebi/Blunomy_cs/models/olr_clf/reports/'
+if not os.path.exists(report_dir):
+    os.makedirs(report_dir)
+
+with open(report_dir + 'train_classification_report.txt', 'w') as f:
+    f.write(train_class_rep)
+
+print("Creating plots for training data and saving to olr_clf/plts...")
+train_cm = confusion_matrix(y_train, olr_train_pred)
 
 ## Plot the graphs to help visualize the accuracy and quality of the model
-plt_conf_matrix(cm, plts_dir + 'confusion_matrix.png')
-
-plt_roc(y_test_binary, binary_olr_pred, y_train_binary, binary_olr_train_pred, plts_dir + 'roc_curve.png')
-
-plt_prec_recall(y_test_binary, binary_olr_pred, plts_dir + 'precision_recall.png')
+plt_conf_matrix(test_cm, plts_dir + 'test_confusion_matrix.png')
+plt_conf_matrix(train_cm, plts_dir + 'train_confusion_matrix.png')
 
 
 

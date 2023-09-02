@@ -42,18 +42,15 @@ rf_model = RandomForestClassifier(random_state=0, verbose=2)
 # Define the params
 print("Defining parameters...")
 rf_params = {
-    'n_estimators': [50, 100, 250, 500, 750, 1000],
-    'max_depth': [None, 2, 5, 8, 12, 16, 20],
-    'min_samples_leaf': [1, 2, 3, 4, 5, 7, 10],
-    'min_samples_split': [2, 5, 10],
-    'max_features': ['auto', 'sqrt', 'log2'],
-    'bootstrap': [True, False], 
+    'n_estimators': [100, 250, 500],
+    'max_depth': [2, 5, 8],
+    'min_samples_leaf': [1, 3, 5],
     'class_weight': [None, 'balanced']
 }
 
 # Randomized search cross-validation
 print("Initializing Random search cross-validation...")
-rf_clf = RandomizedSearchCV(rf_model, rf_params, n_iter=20, random_state=0, n_jobs= 10, verbose=3)
+rf_clf = RandomizedSearchCV(rf_model, rf_params, n_iter=10, random_state=0, n_jobs= 3, verbose=3)
 
 # Trainign the model
 print("Training Random Forest Classifier model...")
@@ -85,6 +82,14 @@ binary_rf_train_pred = rf_clf.predict(x_train)
 print("Creating a classification report...")
 class_rep = classification_report(y_test_binary, binary_rf_pred)
 print(class_rep)
+
+## Saving classification report 
+report_dir = '/home/ebi/Blunomy_cs/models/binary_rf_clf/reports/'
+if not os.path.exists(report_dir):
+    os.makedirs(report_dir)
+
+with open(report_dir + 'classification_report.txt', 'w') as f:
+    f.write(class_rep)
 
 ## Create a confusion matrix using the y_test and predicted test data
 print("Creating plots and saving to binary_rf_clf/plts folder...")
