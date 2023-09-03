@@ -6,17 +6,25 @@
 2. [Audience](#audience)
 3. [EDA Questions Answered](#eda-questions-answered)
 4. [Problem Statement](#problem-statement)
-5. [Project Structure](#project-structure)
+5. [Approach](#approach)
+6. [What we hope to achieve](#what-we-hope-to-achieve)
+7. [Project Structure](#project-structure)
     - [models](#models)
     - [notebooks](#notebooks)
     - [src](#src)
-6. [Setup](#setup)
-7. [Usage](#usage)
+8. [Setup](#setup)
+9. [Usage](#usage)
 
 
 ## Introduction
 
 This project aims to address road safety issues by using machine learning to analyze various factors that contribute to the severity of accidents and predict the severity of an accident on the basis of chosen variables.
+
+We utilize data from the [VicRoads CrashStats Dataset](https://data.vicroads.vic.gov.au/Metadata/Crash%20Stats%20-%20Data%20Extract%20-%20Open%20Data.html) to conduct our analysis and train our model. 
+
+The Entity Relationship between the tables of the dataset is as follows:
+
+[erd crashstats](./data/erd1.png)
 
 ## Audience
 
@@ -28,7 +36,15 @@ The exploratory data analysis (EDA) aims to identify factors that contribute to 
 
 ## Problem Statement
 
-The project attempts to mitigate the number of collisions occurring due to specific road geometries, such as T-intersections and cross intersections.
+The project aims to reduce the frequency and severity of traffic collisions attributed to specific types of road geometries, including T-intersections and cross-intersections. 
+
+## Approach
+
+To achieve this, we've developed a predictive model that assesses the risk level associated with various intersections.
+
+## What we hope to achieve
+
+By providing data-driven insights into accident severity, the model serves as a valuable tool for Victorian Local Councils. It not only helps identify existing high-risk intersections but also informs the design of future intersections to minimize their inherent collision risks. Additionally, the model assists Victorian traffic police in optimizing resource allocation, thereby enhancing their ability to either prevent or mitigate the impact of traffic collisions.
 
 ## Project Structure
 
