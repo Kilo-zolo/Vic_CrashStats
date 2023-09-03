@@ -1,0 +1,9 @@
+numpy
+pandas
+seaborn
+matplotlib
+folium
+simple_colors
+joblib
+scikit-learn  
+mord
