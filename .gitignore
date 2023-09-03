@@ -3,4 +3,4 @@ data/processed/*
 data/raw/*
 data/custom/*
 notebooks/outputs
-
+.env
