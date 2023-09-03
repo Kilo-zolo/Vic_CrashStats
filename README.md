@@ -24,7 +24,8 @@ We utilize data from the [VicRoads CrashStats Dataset](https://data.vicroads.vic
 
 The Entity Relationship between the tables of the dataset is as follows:
 
-[erd crashstats](./data/erd1.png)
+[![erd](./data/erd1.png)](./data/erd1.png)
+
 
 ## Audience
 
