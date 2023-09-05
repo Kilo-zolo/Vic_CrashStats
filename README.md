@@ -43,9 +43,16 @@ The project aims to reduce the frequency and severity of traffic collisions attr
 
 To achieve this, we've developed a predictive model that assesses the risk level associated with various intersections.
 
-## What we hope to achieve
+## What we achieved
 
-By providing data-driven insights into accident severity, the model serves as a valuable tool for Victorian Local Councils. It not only helps identify existing high-risk intersections but also informs the design of future intersections to minimize their inherent collision risks. Additionally, the model assists Victorian traffic police in optimizing resource allocation, thereby enhancing their ability to either prevent or mitigate the impact of traffic collisions.
+- **Data-Driven Insights for Local Councils**
+  - Provides valuable insights into accident severity.
+  - Helps identify existing high-risk intersections.
+  - Informs the design of future intersections to minimize collision risks.
+
+- **Resource Optimization for Traffic Police**
+  - Assists in optimizing resource allocation.
+  - Enhances the ability to either prevent or mitigate the impact of traffic collisions.
 
 ## Project Structure
 
