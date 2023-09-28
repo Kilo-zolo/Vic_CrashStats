@@ -54,6 +54,16 @@ To achieve this, we've developed a predictive model that assesses the risk level
   - Assists in optimizing resource allocation.
   - Enhances the ability to either prevent or mitigate the impact of traffic collisions.
 
+## Some Important Insights 
+
+- A significant amount of accidents take place on Friday during rush-hour specifically @ 8am and between 3-5pm
+- Highest number of collisions occur between speeds of 60-70kmph
+- Most fatal accidents occur to individuals aged between 30-39
+- A significant amount of total collisions occur at T & Cross Intersections
+- Highest number of accidents occur within the Melbourne CBD and Urban Are Districts
+
+**Note: You can view these outputs by going through the eda.ipynb notebook in the 'notebooks' directory**
+
 ## Project Structure
 
 The project has a variety of directories, each with a specific purpose:
